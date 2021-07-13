@@ -1,0 +1,33 @@
+<mat-card class="msger">
+  <mat-card-header class="msger-header">
+      <mat-icon class="chat-icon" aria-hidden="false" aria-label="Chat">chat</mat-icon>
+      <span class="m-a fs-l">SimpleChat</span>
+  </mat-card-header>
+
+  <mat-card-content class="msger-chat" #msgerChat>
+    <div class="msg" [class]="msg.alignment+'-msg'" *ngFor="let msg of messages">
+      <div
+       class="msg-img"
+       [style.background-image]="'url('+ msg.image +')'"
+      ></div>
+
+      <div class="msg-bubble">
+        <div class="msg-info">
+          <div class="msg-info-name">{{msg.name}}</div>
+          <div class="msg-info-time">{{msg.date | date: 'short'}}</div>
+        </div>
+
+        <div class="msg-text">
+           {{ msg.message }}
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
+
+  <mat-card-actions class="msger-inputarea" #msgerinputarea>
+    <mat-form-field class="msger-input">
+      <input matInput [(ngModel)]="message" (keyup.enter)="sendMessage()" placeholder="Enter your message..." />
+    </mat-form-field>
+    <button mat-raised-button type="submit" class="msger-send-btn" (click)="sendMessage()">Send</button>
+  </mat-card-actions>
+</mat-card>
